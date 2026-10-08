@@ -1,0 +1,6 @@
+{
+  "name": "@grassquest/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GrassQuest backend server"
+}
