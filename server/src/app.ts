@@ -3,7 +3,7 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import { config } from "./config.js";
-import { getDbStatus } from "./db.js";
+import { healthRouter } from "./routes/health.js";
 
 // Create the Express app
 const app = express();
@@ -18,10 +18,8 @@ app.use(cors({ origin: config.corsOrigin }));
 
 // --- Routes ---
 
-// Health check: returns server status and database connection state
-app.get("/api/health", (_req: Request, res: Response) => {
-  res.json({ ok: true, data: { status: "up", db: getDbStatus() } });
-});
+// Health and AI health routes (/api/health, /api/ai/health)
+app.use("/api", healthRouter);
 
 // --- Error Handling ---
 
