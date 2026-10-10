@@ -1,8 +1,11 @@
-// Loads and validates environment variables using Zod.
-// Any missing or invalid env var will throw a clear error at startup.
-
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "node:path";
 import { z } from "zod";
+
+// Load .env from current directory or monorepo root
+dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), "../.env") });
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
 // Schema for all environment variables the server needs
 const envSchema = z.object({
