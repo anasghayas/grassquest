@@ -5,6 +5,8 @@ import cors from "cors";
 import { z } from "zod";
 import { config } from "./config.js";
 import { healthRouter } from "./routes/health.js";
+import { playersRouter } from "./routes/players.js";
+import { questsRouter } from "./routes/quests.js";
 import { getWeather } from "./services/weather.js";
 
 // Create the Express app
@@ -22,6 +24,12 @@ app.use(cors({ origin: config.corsOrigin }));
 
 // Health and AI health routes (/api/health, /api/ai/health)
 app.use("/api", healthRouter);
+
+// Player routes (/api/players/init, /api/players/:deviceId)
+app.use("/api/players", playersRouter);
+
+// Quest routes (/api/quests/today)
+app.use("/api/quests", questsRouter);
 
 // Debug weather route: fetches real weather for coordinates (dev only)
 app.get("/api/debug/weather", async (req: Request, res: Response) => {
